@@ -199,7 +199,7 @@ html, body {
 }
 #chat-messages {
   flex: 1; padding: 0.75rem 1rem;
-  background: #f9f9f9; overflow-y: auto;
+  background: #f9f9f9; 
 }
  
 /* Message bubbles */
@@ -247,6 +247,7 @@ html, body {
     right: 1rem;
   }
 }
+
 
 
 
