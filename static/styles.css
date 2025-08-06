@@ -36,16 +36,16 @@ html, body {
  
 /* White card */
 .quote-card {
-  position: relative;
   background: var(--white);
   border-radius: 12px;
   padding: 1.5rem;
-  width: 100%; max-width: 450px;
+  width: 100%;
+  max-width: 450px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  z-index: 1;
-  max-height: calc(100vh - 8rem);
-  overflow-y: auto;
+  margin-top: 1rem;
+  /* Removed max-height and overflow-y */
 }
+
 .quote-card h1 {
   margin: 0 0 1.5rem;
   color: var(--text-dsv);
@@ -247,6 +247,7 @@ html, body {
     right: 1rem;
   }
 }
+
 
 
 
