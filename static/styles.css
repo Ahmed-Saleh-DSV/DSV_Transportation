@@ -29,7 +29,7 @@ html, body {
 /* Logo pinned above card */
 .dsv-logo {
   position: absolute;
-  top: 1rem; left: 50%;
+  top: 1.5rem; left: 50%;
   transform: translateX(-50%);
   width: 140px; z-index: 2;
 }
@@ -247,3 +247,4 @@ html, body {
     right: 1rem;
   }
 }
+
