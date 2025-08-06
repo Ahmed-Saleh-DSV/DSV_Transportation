@@ -2,7 +2,7 @@
   --blue-dsv:       #002664;
   --blue-dsv-light: #4B87E0;
   --white:          #ffffff;
-  --text-dsv:       #002c77;
+  --text-dsv:       #002664;
 }
  
 /* Reset & base */
@@ -29,7 +29,7 @@ html, body {
 /* Logo pinned above card */
 .dsv-logo {
   position: absolute;
-  top: 0.5rem; left: 50%;
+  top: 0.4rem; left: 50%;
   transform: translateX(-50%);
   width: 140px; z-index: 2;
 }
@@ -247,6 +247,7 @@ html, body {
     right: 1rem;
   }
 }
+
 
 
 
