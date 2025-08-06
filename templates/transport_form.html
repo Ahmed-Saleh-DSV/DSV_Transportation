@@ -57,7 +57,7 @@
 <span>Return</span>
 </label>
 <label>
-<input type="radio" name="trip_type" value="multi_stop" />
+<input type="radio" name="trip_type" value="multi" />
 <span>Multiple</span>
 </label>
 </div>
@@ -151,7 +151,7 @@
           radio.closest('label').classList.add('selected');
  
           // show/hide additional cities
-          if (radio.value === 'multi_stop') {
+          if (radio.value === 'multi') {
             stopsContainer.style.display = 'block';
             if (!stopCount) addStop();
           } else {
@@ -187,4 +187,5 @@
 </script>
 </body>
 </html>
+
 
