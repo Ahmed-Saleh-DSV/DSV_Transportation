@@ -1,6 +1,6 @@
 :root {
-  --blue-dsv:       #002c77;
-  --blue-dsv-light: #00389b;
+  --blue-dsv:       #002664;
+  --blue-dsv-light: #4B87E0;
   --white:          #ffffff;
   --text-dsv:       #002c77;
 }
@@ -247,5 +247,6 @@ html, body {
     right: 1rem;
   }
 }
+
 
 
