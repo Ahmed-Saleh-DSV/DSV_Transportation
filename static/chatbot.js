@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const remove = document.createElement('button');
     remove.type = 'button';
     remove.className = 'btn-remove';
-    remove.innerHTML = '<i class="fas fa-times-circle"></i>';
+    remove.textContent = 'Clear';
     remove.addEventListener('click', () => stopsList.removeChild(group));
 
     group.appendChild(input);
