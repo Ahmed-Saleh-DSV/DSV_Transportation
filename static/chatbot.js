@@ -1,4 +1,4 @@
-// 🔧 Fix for mobile viewport height
+// 🔧 Fix for mobile viewport height (ensures chat icon appears on load)
 window.addEventListener('load', () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputEl    = document.getElementById('chat-input');
   const msgsEl     = document.getElementById('chat-messages');
 
-  chatToggle.addEventListener('click', () => chatBox.classList.toggle('active'));
-  chatClose.addEventListener('click', () => chatBox.classList.remove('active'));
+  chatToggle.addEventListener('click', () => chatBox.classList.toggle('open'));
+  chatClose.addEventListener('click', () => chatBox.classList.remove('open'));
   sendBtn.addEventListener('click', sendMessage);
   inputEl.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 🛣️ Trip type logic
+  // 🚚 Trip Type Logic + Add Stops
   const tripRadios     = document.querySelectorAll('input[name="trip_type"]');
   const stopsContainer = document.getElementById('stops-container');
   const stopsList      = document.getElementById('stops-list');
@@ -101,11 +101,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const group = document.createElement('div');
     group.className = 'stop-group';
 
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.name = `destination${stopCount + 1}`;
-    input.placeholder = `City ${stopCount + 1}`;
-    input.required = true;
+    const select = document.createElement('select');
+    select.name = `destination${stopCount + 1}`;
+    select.required = true;
+
+    const cities = [
+      "Mussafah", "Alain Industrial Area", "AUH Airport", "ICAD", "Khalifa Port",
+      "Abu Dhabi City", "Al Ruwais", "Al Dhafra", "Al Ain City", "Dubai",
+      "Jebel Ali", "Sharjah", "RAK", "Fujairah"
+    ];
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = `— Select City ${stopCount + 1} —`;
+    select.appendChild(defaultOption);
+
+    cities.forEach(city => {
+      const option = document.createElement('option');
+      option.value = city;
+      option.textContent = city;
+      select.appendChild(option);
+    });
 
     const remove = document.createElement('button');
     remove.type = 'button';
@@ -113,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     remove.textContent = 'Clear';
     remove.addEventListener('click', () => stopsList.removeChild(group));
 
-    group.appendChild(input);
+    group.appendChild(select);
     group.appendChild(remove);
     stopsList.appendChild(group);
   }
