@@ -138,4 +138,46 @@ document.addEventListener('DOMContentLoaded', () => {
       stopsList.appendChild(group);
     }
   }
+
+  // ✅ Truck Type + Count logic
+  const truckTypeContainer = document.getElementById('truckTypeContainer');
+  const addTruckBtn = document.getElementById('add-truck-type');
+
+  if (truckTypeContainer && addTruckBtn) {
+    addTruckBtn.addEventListener('click', addTruckTypeRow);
+
+    function addTruckTypeRow() {
+      const row = document.createElement('div');
+      row.className = 'truck-type-row';
+
+      const select = document.createElement('select');
+      select.name = 'truck_type[]';
+      select.required = true;
+      select.innerHTML = `
+        <option value="">— Select —</option>
+        <option value="flatbed">Flatbed Truck (22–25 tons)</option>
+        <option value="box">Box Truck / Curtainside (5–10 tons)</option>
+        <option value="reefer">Refrigerated Truck (3–12 tons)</option>
+        <option value="city">City Truck (1–3 tons)</option>
+        <option value="tipper">Tipper / Dump Truck (15–20 tons)</option>
+        <option value="double_trailer">Double Trailer</option>
+        <option value="10_ton">10-Ton Truck</option>
+        <option value="lowbed">Lowbed</option>
+      `;
+
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.name = 'truck_count[]';
+      input.placeholder = 'Count';
+      input.min = '1';
+      input.required = true;
+
+      row.appendChild(select);
+      row.appendChild(input);
+      truckTypeContainer.appendChild(row);
+    }
+
+    // إضافة صف أول تلقائيًا
+    addTruckTypeRow();
+  }
 });
