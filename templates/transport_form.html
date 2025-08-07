@@ -99,7 +99,7 @@
           <label>Trip Type</label>
           <div class="trip-options">
             <label><input type="radio" name="trip_type" value="one_way" required /><span>One Way</span></label>
-            <label><input type="radio" name="trip_type" value="return" /><span>Return</span></label>
+            <label><input type="radio" name="trip_type" value="back_load" /><span>Back Load</span></label>
             <label><input type="radio" name="trip_type" value="multi" /><span>Multiple</span></label>
           </div>
         </div>
@@ -112,24 +112,27 @@
         </div>
 
         <!-- Truck Type -->
-        <div class="form-group">
-          <label for="truck_type">Truck Type</label>
-          <select id="truck_type" name="truck_type" required>
-            <option value="">— Select —</option>
-            <option value="flatbed">Flatbed Truck (22–25 tons)</option>
-            <option value="box">Box Truck / Curtainside (5–10 tons)</option>
-            <option value="reefer">Refrigerated Truck (3–12 tons)</option>
-            <option value="city">City Truck (1–3 tons)</option>
-            <option value="tipper">Tipper / Dump Truck (15–20 tons)</option>
-            <option value="double_trailer">Double Trailer</option>
-            <option value="10_ton">10-Ton Truck</option>
-            <option value="lowbed">Lowbed</option>
-          </select>  
-          </div>
-         <div class="form-group" style="flex: 1;">
-            <label for="truck_count">Quantity</label>
-             <input type="number" id="truck_count" name="truck_count" placeholder="Count" min="1" required />
-        </div>
+        <div class="form-row">
+  <div class="form-group truck">
+    <label for="truck_type">Truck Type</label>
+    <select id="truck_type" name="truck_type" required>
+      <option value="">— Select —</option>
+      <option value="flatbed">Flatbed Truck (22–25 tons)</option>
+      <option value="box">Box Truck / Curtainside (5–10 tons)</option>
+      <option value="reefer">Refrigerated Truck (3–12 tons)</option>
+      <option value="city">City Truck (1–3 tons)</option>
+      <option value="tipper">Tipper / Dump Truck (15–20 tons)</option>
+      <option value="double_trailer">Double Trailer</option>
+      <option value="10_ton">10-Ton Truck</option>
+      <option value="lowbed">Lowbed</option>
+    </select>  
+  </div>
+  <div class="form-group qut">
+    <label for="truck_count">Qut</label>
+    <input type="number" id="truck_count" name="truck_count" placeholder="Count" min="1" required />
+  </div>
+</div>
+
         <!-- Cargo Type -->
         <div class="form-group">
           <label for="cargo_type">Cargo Type</label>
@@ -175,13 +178,4 @@
 <script src="{{ url_for('static', filename='chatbot.js') }}"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
