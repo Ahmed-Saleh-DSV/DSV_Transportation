@@ -110,10 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
       select.required = true;
 
       const cities = [
-        "Mussafah", "Alain Industrial Area", "AUH Airport", "ICAD", "Khalifa Port",
-        "Abu Dhabi City", "Al Ruwais", "Al Dhafra", "Al Ain City", "Dubai",
-        "Jebel Ali", "Sharjah", "RAK", "Fujairah"
-      ];
+  "Mussafah", "Alain Industrial Area", "Al Ain City Limits", "AUH Airport", "Abu Dhabi City Limits", "Mafraq", "ICAD 2/ICAD3", "ICAD 4", "Al Wathba", "Mina Zayed/Free Port", "Tawazun Industrial Park", "KIZAD", "Khalifa Port/Taweelah", "Sweihan", "Yas Island", "Ghantoot", "Jebel Ali", "Dubai-Al Qusais",  "Dubai-Al Quoz",  "Dubai-DIP/DIC",  "Dubai-DMC", "Dubai-City Limits", "Sharjah", "Sharjah-Hamriyah", "Ajman", "Umm Al Quwain","Fujairah", "Ras Al Khaimah-Al Ghail","Ras Al Khaimah-Hamra", "Al Markaz Area","Baniyas"
+];
+
 
       const defaultOption = document.createElement('option');
       defaultOption.value = '';
@@ -177,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
       truckTypeContainer.appendChild(row);
     }
 
-    // إضافة صف أول تلقائيًا
     addTruckTypeRow();
   }
 });
