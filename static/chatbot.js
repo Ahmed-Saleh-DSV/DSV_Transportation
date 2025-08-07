@@ -69,3 +69,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tripRadios     = document.querySelectorAll('input[name="trip_type"]');
+    const stopsContainer = document.getElementById('stops-container');
+    const stopsList      = document.getElementById('stops-list');
+    const quoteCard      = document.querySelector('.quote-card');
+    let stopCount        = 0;
+
+    tripRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        tripRadios.forEach(r => r.closest('label').classList.remove('selected'));
+        radio.closest('label').classList.add('selected');
+
+        if (radio.value === 'multi') {
+          stopsContainer.style.display = 'block';
+          quoteCard.classList.add('scroll-enabled');
+          if (!stopCount) addStop();
+        } else {
+          stopsContainer.style.display = 'none';
+          stopsList.innerHTML = '';
+          stopCount = 0;
+          quoteCard.classList.remove('scroll-enabled');
+        }
+      });
+    });
+
+    document.getElementById('add-stop').addEventListener('click', addStop);
+
+    function addStop() {
+      stopCount++;
+      const group = document.createElement('div');
+      group.className = 'stop-group';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.name = `destination${stopCount + 1}`;
+      input.placeholder = `City ${stopCount + 1}`;
+      input.required = true;
+
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'btn-remove';
+      remove.textContent = '×';
+      remove.addEventListener('click', () => stopsList.removeChild(group));
+
+      group.appendChild(input);
+      group.appendChild(remove);
+      stopsList.appendChild(group);
+    }
+  });
+</script>
+
+
