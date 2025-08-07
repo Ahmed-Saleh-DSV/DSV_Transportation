@@ -241,6 +241,7 @@ html, body {
   overflow-y: auto;
 }
 
+/* زر الإزالة بكلمة Clear */
 .stop-group {
   position: relative;
   margin-bottom: 1rem;
@@ -248,7 +249,7 @@ html, body {
 
 .stop-group input {
   width: 100%;
-  padding-right: 2.5rem;
+  padding-right: 4rem;
 }
 
 .stop-group .btn-remove {
@@ -256,16 +257,16 @@ html, body {
   top: 50%;
   right: 0.5rem;
   transform: translateY(-50%);
-  background: none;
-  color: var(--blue-dsv);
+  background: var(--blue-dsv-light);
+  color: white;
   border: none;
-  font-size: 1.2rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: background 0.2s;
 }
 
 .stop-group .btn-remove:hover {
-  color: var(--blue-dsv-light);
+  background: var(--blue-dsv);
 }
-
-
