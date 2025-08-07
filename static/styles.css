@@ -78,14 +78,7 @@ html, body {
   gap: 1rem;
 }
 .form-row .form-group {
-  display: flex;
-  flex-direction: column;
-}
-.form-row .form-group:nth-child(1) {
-  flex: 2; /* Truck Type */
-}
-.form-row .form-group:nth-child(2) {
-  flex: 1; /* Quantity */
+  flex: 1;
 }
 
 .trip-options {
@@ -306,6 +299,22 @@ html, body {
 .btn-clear:hover {
   background: darkred;
 }
+
+.truck-type-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.form-row .form-group.truck {
+  flex: 3;
+}
+
+.form-row .form-group.quantity {
+  flex: 1;
+}
+
 
 #truckTypeContainer {
   margin-top: 1rem;
