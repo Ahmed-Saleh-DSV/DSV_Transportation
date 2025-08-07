@@ -253,9 +253,14 @@ html, body {
   overflow-y: auto;
 }
 
-/* City input with remove button */
 .stop-group {
   position: relative;
+  margin-bottom: 1rem;
+}
+
+.stop-group input {
+  width: 100%;
+  padding-right: 2.5rem;
 }
 
 .stop-group .btn-remove {
@@ -277,6 +282,7 @@ html, body {
 .stop-group .btn-remove:hover {
   background: #cc0000;
 }
+
 
 
 
