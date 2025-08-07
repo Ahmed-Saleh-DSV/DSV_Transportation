@@ -247,6 +247,37 @@ html, body {
     right: 1rem;
   }
 }
+/* Scroll only when multiple stops are selected */
+.quote-card.scroll-enabled {
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+/* City input with remove button */
+.stop-group {
+  position: relative;
+}
+
+.stop-group .btn-remove {
+  position: absolute;
+  top: 2.2rem;
+  right: 0.5rem;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.stop-group .btn-remove:hover {
+  background: #cc0000;
+}
+
 
 
 
