@@ -1,45 +1,262 @@
 import os
 import io
-import re
 from datetime import date
-from flask import Flask, render_template, request, send_file, jsonify
+from flask import Flask, render_template, request, send_file
 from docxtpl import DocxTemplate
- 
+
 app = Flask(__name__)
- 
- 
+
+# قاموس الأسعار حسب المدينة ونوع الشاحنة
+rates = {
+    "Abu Dhabi City Limits": {
+        "3 Ton Pickup": 400,
+        "7 Ton Pickup": 550,
+        "Flatbed": 800,
+        "Hazmat FB": 1350,
+        "Curtain side Trailer": 1100
+    },
+    "Ajman": {
+        "3 Ton Pickup": 700,
+        "7 Ton Pickup": 1200,
+        "Flatbed": 1750,
+        "Hazmat FB": 2900,
+        "Curtain side Trailer": 2300
+    },
+    "Al Ain City Limits": {
+        "3 Ton Pickup": 690,
+        "7 Ton Pickup": 890,
+        "Flatbed": 1400,
+        "Hazmat FB": 2350,
+        "Curtain side Trailer": 1700
+    },
+    "Al Markaz Area": {
+        "3 Ton Pickup": 400,
+        "7 Ton Pickup": 500,
+        "Flatbed": 750,
+        "Hazmat FB": 1350,
+        "Curtain side Trailer": 1300
+    },
+    "Al Wathba": {
+        "3 Ton Pickup": 450,
+        "7 Ton Pickup": 600,
+        "Flatbed": 750,
+        "Hazmat FB": 1350,
+        "Curtain side Trailer": 1100
+    },
+    "Alain Industrial Area": {
+        "3 Ton Pickup": 650,
+        "7 Ton Pickup": 850,
+        "Flatbed": 1300,
+        "Hazmat FB": 2200,
+        "Curtain side Trailer": 1600
+    },
+    "AUH Airport": {
+        "3 Ton Pickup": 400,
+        "7 Ton Pickup": 600,
+        "Flatbed": 800,
+        "Hazmat FB": 1350,
+        "Curtain side Trailer": 1100
+    },
+    "Baniyas": {
+        "3 Ton Pickup": 400,
+        "7 Ton Pickup": 600,
+        "Flatbed": 750,
+        "Hazmat FB": 1350,
+        "Curtain side Trailer": 1300
+    },
+    "Dubai-Al Quoz": {
+        "3 Ton Pickup": 650,
+        "7 Ton Pickup": 950,
+        "Flatbed": 1350,
+        "Hazmat FB": 2300,
+        "Curtain side Trailer": 1850
+    },
+    "Dubai-Al Qusais": {
+        "3 Ton Pickup": 650,
+        "7 Ton Pickup": 950,
+        "Flatbed": 1400,
+        "Hazmat FB": 2400,
+        "Curtain side Trailer": 1950
+    },
+    "Dubai-City Limits": {
+        "3 Ton Pickup": 650,
+        "7 Ton Pickup": 950,
+        "Flatbed": 1400,
+        "Hazmat FB": 2400,
+        "Curtain side Trailer": 1900
+    },
+    "Dubai-DIP/DIC": {
+        "3 Ton Pickup": 600,
+        "7 Ton Pickup": 850,
+        "Flatbed": 1200,
+        "Hazmat FB": 2100,
+        "Curtain side Trailer": 1650
+    },
+    "Dubai-DMC": {
+        "3 Ton Pickup": 650,
+        "7 Ton Pickup": 950,
+        "Flatbed": 1350,
+        "Hazmat FB": 2400,
+        "Curtain side Trailer": 1900
+    },
+    "Fujairah": {
+        "3 Ton Pickup": 950,
+        "7 Ton Pickup": 1500,
+        "Flatbed": 2300,
+        "Hazmat FB": 3400,
+        "Curtain side Trailer": 3100
+    },
+    "Ghantoot": {
+        "3 Ton Pickup": 550,
+        "7 Ton Pickup": 700,
+        "Flatbed": 1000,
+        "Hazmat FB": 1650,
+        "Curtain side Trailer": 1350
+    },
+    "ICAD 2/ICAD3": {
+        "3 Ton Pickup": 350,
+        "7 Ton Pickup": 450,
+        "Flatbed": 500,
+        "Hazmat FB": 950,
+        "Curtain side Trailer": 850
+    },
+    "ICAD 4": {
+        "3 Ton Pickup": 350,
+        "7 Ton Pickup": 485,
+        "Flatbed": 550,
+        "Hazmat FB": 1000,
+        "Curtain side Trailer": 950
+    },
+    "Jebel Ali": {
+        "3 Ton Pickup": 600,
+        "7 Ton Pickup": 850,
+        "Flatbed": 1200,
+        "Hazmat FB": 2100,
+        "Curtain side Trailer": 1650
+    },
+    "Khalifa Port/Taweelah": {
+        "3 Ton Pickup": 400,
+        "7 Ton Pickup": 500,
+        "Flatbed": 750,
+        "Hazmat FB": 1300,
+        "Curtain side Trailer": 1200
+    },
+    "KIZAD": {
+        "3 Ton Pickup": 400,
+        "7 Ton Pickup": 500,
+        "Flatbed": 750,
+        "Hazmat FB": 1300,
+        "Curtain side Trailer": 1200
+    },
+    "Mafraq": {
+        "3 Ton Pickup": 350,
+        "7 Ton Pickup": 550,
+        "Flatbed": 650,
+        "Hazmat FB": 1100,
+        "Curtain side Trailer": 900
+    },
+    "Mina Zayed/Free Port": {
+        "3 Ton Pickup": 400,
+        "7 Ton Pickup": 600,
+        "Flatbed": 750,
+        "Hazmat FB": 1350,
+        "Curtain side Trailer": 1100
+    },
+    "Mussafah": {
+        "3 Ton Pickup": 300,
+        "7 Ton Pickup": 350,
+        "Flatbed": 400,
+        "Hazmat FB": 900,
+        "Curtain side Trailer": 750
+    },
+    "Ras Al Khaimah-Al Ghail": {
+        "3 Ton Pickup": 950,
+        "7 Ton Pickup": 1400,
+        "Flatbed": 1950,
+        "Hazmat FB": 3200,
+        "Curtain side Trailer": 2700
+    },
+    "Ras Al Khaimah-Hamra": {
+        "3 Ton Pickup": 1050,
+        "7 Ton Pickup": 1400,
+        "Flatbed": 2100,
+        "Hazmat FB": 3200,
+        "Curtain side Trailer": 2800
+    },
+    "Sharjah": {
+        "3 Ton Pickup": 680,
+        "7 Ton Pickup": 1100,
+        "Flatbed": 1600,
+        "Hazmat FB": 2700,
+        "Curtain side Trailer": 2100
+    },
+    "Sharjah-Hamriyah": {
+        "3 Ton Pickup": 680,
+        "7 Ton Pickup": 1100,
+        "Flatbed": 1600,
+        "Hazmat FB": 2700,
+        "Curtain side Trailer": 2100
+    },
+    "Sweihan": {
+        "3 Ton Pickup": 600,
+        "7 Ton Pickup": 725,
+        "Flatbed": 950,
+        "Hazmat FB": 1600,
+        "Curtain side Trailer": 1300
+    },
+    "Tawazun Industrial Park": {
+        "3 Ton Pickup": 500,
+        "7 Ton Pickup": 650,
+        "Flatbed": 850,
+        "Hazmat FB": 1500,
+        "Curtain side Trailer": 1300
+    },
+    "Umm Al Quwain": {
+        "3 Ton Pickup": 900,
+        "7 Ton Pickup": 1300,
+        "Flatbed": 1900,
+        "Hazmat FB": 3000,
+        "Curtain side Trailer": 2500
+    },
+    "Yas Island": {
+        "3 Ton Pickup": 400,
+        "7 Ton Pickup": 650,
+        "Flatbed": 800,
+        "Hazmat FB": 1400,
+        "Curtain side Trailer": 1200
+    }
+}
+
 @app.route("/")
 def index():
     return render_template("transport_form.html")
- 
- 
+
 @app.route("/generate_transport", methods=["POST"])
 def generate_transport():
-    origin      = request.form.get("origin", "")
+    origin = request.form.get("origin", "")
     destination = request.form.get("destination", "")
-    trip_type   = request.form.get("trip_type", "")
-    truck_type  = request.form.get("truck_type", "")
-    cargo_type  = request.form.get("cargo_type", "general")
-    cicpa_pass  = request.form.get("cicpa", "No") == "Yes"
- 
-    # TODO: replace with your actual rate‐calculation logic
-    unit_rate = 123.45
+    trip_type = request.form.get("trip_type", "")
+    truck_type = request.form.get("truck_type", "")
+    cargo_type = request.form.get("cargo_type", "general")
+    cicpa_pass = request.form.get("cicpa", "No") == "Yes"
+
+    unit_rate = rates.get(destination, {}).get(truck_type, 0)
     total_fee = unit_rate
- 
+
     tpl = DocxTemplate("templates/TransportQuotation.docx")
     context = {
-        "TODAY_DATE":    date.today().strftime("%d %B %Y"),
-        "ORIGIN":        origin,
-        "DESTINATION":   destination,
-        "TRIP_TYPE":     trip_type.replace("_", " ").title(),
-        "TRUCK_TYPE":    truck_type.replace("_", " ").title(),
-        "CARGO_TYPE":    "Chemical Load" if cargo_type == "chemical" else "General Cargo",
-        "CICPA_PASS":    "Yes" if cicpa_pass else "No",
-        "UNIT_RATE":     f"{unit_rate:.2f} AED",
-        "TOTAL_FEE":     f"{total_fee:.2f} AED"
+        "TODAY_DATE": date.today().strftime("%d %B %Y"),
+        "ORIGIN": origin,
+        "DESTINATION": destination,
+        "TRIP_TYPE": trip_type.replace("_", " ").title(),
+        "TRUCK_TYPE": truck_type.replace("_", " ").title(),
+        "CARGO_TYPE": "Chemical Load" if cargo_type == "chemical" else "General Cargo",
+        "CICPA_PASS": "Yes" if cicpa_pass else "No",
+        "UNIT_RATE": f"{unit_rate:.2f} AED",
+        "TOTAL_FEE": f"{total_fee:.2f} AED"
     }
     tpl.render(context)
- 
+
     doc_io = io.BytesIO()
     tpl.save(doc_io)
     doc_io.seek(0)
@@ -49,7 +266,6 @@ def generate_transport():
         download_name="DSV_Transport_Quotation.docx",
         mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     )
- 
  
 @app.route("/chat", methods=["POST"])
 def chat():
