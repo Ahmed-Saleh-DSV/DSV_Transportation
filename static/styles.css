@@ -253,20 +253,24 @@ html, body {
 }
 
 .stop-group .btn-remove {
+.stop-group .btn-remove {
   position: absolute;
-  top: 50%;
+  top: 2.2rem;
   right: 0.5rem;
-  transform: translateY(-50%);
-  background: var(--blue-dsv-light);
-  color: white;
-  border: none;
-  padding: 0.3rem 0.6rem;
+  background: none;
+  color: var(--blue-dsv);
+  border: 1px solid var(--blue-dsv);
   border-radius: 6px;
+  padding: 0.2rem 0.6rem;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: background 0.2s;
+  font-weight: bold;
 }
 
 .stop-group .btn-remove:hover {
-  background: var(--blue-dsv);
+  background: var(--blue-dsv-light);
+  color: var(--white);
+  border-color: var(--blue-dsv-light);
 }
+
+
