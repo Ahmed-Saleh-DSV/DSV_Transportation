@@ -4,7 +4,7 @@
   --white:          #ffffff;
   --text-dsv:       #002664;
 }
- 
+
 /* Reset & base */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -15,7 +15,7 @@ html, body {
   font-family: Arial, sans-serif;
   background: var(--blue-dsv);
 }
- 
+
 /* Blue wrapper + card container */
 .quote-section {
   position: relative;
@@ -23,9 +23,9 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 6rem 1rem 2rem; /* room for logo */
+  padding: 6rem 1rem 2rem;
 }
- 
+
 /* Logo pinned above card */
 .dsv-logo {
   position: absolute;
@@ -33,7 +33,7 @@ html, body {
   transform: translateX(-50%);
   width: 140px; z-index: 2;
 }
- 
+
 /* White card */
 .quote-card {
   background: var(--white);
@@ -43,7 +43,6 @@ html, body {
   max-width: 450px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   margin-top: 1rem;
-  /* Removed max-height and overflow-y */
 }
 
 .quote-card h1 {
@@ -72,7 +71,7 @@ html, body {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0,56,155,0.3);
 }
- 
+
 /* From/To side by side */
 .form-row {
   display: flex;
@@ -81,7 +80,7 @@ html, body {
 .form-row .form-group {
   flex: 1;
 }
- 
+
 /* Trip type “slicers” */
 .trip-options {
   display: grid;
@@ -107,7 +106,7 @@ html, body {
   background: var(--blue-dsv);
   color: var(--white);
 }
- 
+
 /* Add/Remove City */
 .btn-add {
   margin: 0.5rem 0;
@@ -124,19 +123,7 @@ html, body {
   color: var(--white);
   border-color: var(--blue-dsv-light);
 }
-.btn-remove {
-  background: #e2e2e2;
-  border: none;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  float: right;
-  margin-top: -2.6rem;
-  cursor: pointer;
-}
-.btn-remove:hover {
-  background: #ccc;
-}
- 
+
 /* Generate button */
 .btn-generate {
   margin-top: 1.5rem;
@@ -154,7 +141,7 @@ html, body {
 .btn-generate:hover {
   background: var(--blue-dsv-light);
 }
- 
+
 /* Chat toggle */
 .chat-toggle {
   position: fixed;
@@ -170,7 +157,7 @@ html, body {
 .chat-toggle img {
   width: 36px; height: 36px;
 }
- 
+
 /* Chat box */
 #chat-box {
   position: fixed; bottom: 6rem; right: 2rem;
@@ -183,7 +170,7 @@ html, body {
   display: flex; flex-direction: column;
   overflow: hidden; z-index: 2999;
 }
-#chat-box.open {
+#chat-box.active {
   transform: translateY(0);
 }
 #chat-box .chat-header {
@@ -201,7 +188,7 @@ html, body {
   flex: 1; padding: 0.75rem 1rem;
   background: #f9f9f9; 
 }
- 
+
 /* Message bubbles */
 .message {
   margin-bottom: 0.6rem; clear: both;
@@ -220,7 +207,7 @@ html, body {
   border-radius: 16px 16px 16px 4px;
   float: left; max-width: 80%;
 }
- 
+
 /* Chat footer */
 .chat-footer {
   display: flex; border-top: 1px solid #ccc;
@@ -236,7 +223,7 @@ html, body {
 #chat-send:hover {
   background: var(--blue-dsv-light);
 }
- 
+
 /* Mobile tweaks */
 @media (max-width: 480px) {
   .dsv-logo { width: 120px; }
@@ -247,6 +234,7 @@ html, body {
     right: 1rem;
   }
 }
+
 /* Scroll only when multiple stops are selected */
 .quote-card.scroll-enabled {
   max-height: calc(100vh - 8rem);
@@ -267,27 +255,14 @@ html, body {
   position: absolute;
   top: 2.2rem;
   right: 0.5rem;
-  background: #ff4d4d;
-  color: white;
+  background: none;
+  color: #ff4d4d;
   border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 16px;
-  line-height: 20px;
-  text-align: center;
+  font-size: 1.2rem;
   cursor: pointer;
+  transition: color 0.2s;
 }
 
 .stop-group .btn-remove:hover {
-  background: #cc0000;
+  color: #cc0000;
 }
-
-
-
-
-
-
-
-
-
