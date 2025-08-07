@@ -222,7 +222,7 @@ html, body {
   clear: both;
 }
 .message.user .bubble {
-  background: var(--blue-dsv);
+  background: red;
   color: var(--white);
   padding: 0.4rem 0.8rem;
   border-radius: 16px 16px 4px 16px;
@@ -299,5 +299,6 @@ html, body {
 .btn-clear:hover {
   background: darkred;
 }
+
 
 
