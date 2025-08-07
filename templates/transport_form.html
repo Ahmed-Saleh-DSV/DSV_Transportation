@@ -21,110 +21,90 @@
             <label for="origin">From</label>
             <select id="origin" name="origin" required>
               <option value="">— Select City —</option>
-              <option>Mussafah</option>
-              <option>Alain Industrial Area</option>
-              <option>Al Ain City Limits</option>
-              <option>AUH Airport</option>
-              <option>Abu Dhabi City Limits</option>
-              <option>Mafraq</option>
-              <option>ICAD 2/ICAD3</option>
-              <option>ICAD 4</option>
-              <option>Al Wathba</option>
-              <option>Mina Zayed/Free Port</option>
-              <option>Tawazun Industrial Park</option>
-              <option>KIZAD</option>
-              <option>Khalifa Port/Taweelah</option>
-              <option>Sweihan</option>
-              <option>Yas Island</option>
-              <option>Ghantoot</option>
-              <option>Jebel Ali</option>
-              <option>Dubai-Al Qusais</option>
-              <option>Dubai-Al Quoz</option>
-              <option>Dubai-DIP/DIC</option>
-              <option>Dubai-DMC</option>
-              <option>Dubai-City Limits</option>
-              <option>Sharjah</option>
-              <option>Sharjah-Hamriyah</option>
-              <option>Ajman</option>
-              <option>Umm Al Quwain</option>
-              <option>Fujairah</option>
-              <option>Ras Al Khaimah-Al Ghail</option>
-              <option>Ras Al Khaimah-Hamra</option>
-              <option>Al Markaz Area</option>
-              <option>Baniyas</option>
+              <option value="Mussafah">Mussafah</option>
+              <option value="Alain Industrial Area">Alain Industrial Area</option>
+              <option value="AUH Airport">AUH Airport</option>
+              <option value="ICAD">ICAD</option>
+              <option value="Khalifa Port">Khalifa Port</option>
+              <option value="Abu Dhabi City">Abu Dhabi City</option>
+              <option value="Al Ruwais">Al Ruwais</option>
+              <option value="Al Dhafra">Al Dhafra</option>
+              <option value="Al Ain City">Al Ain City</option>
+              <option value="Dubai">Dubai</option>
+              <option value="Jebel Ali">Jebel Ali</option>
+              <option value="Sharjah">Sharjah</option>
+              <option value="RAK">RAK</option>
+              <option value="Fujairah">Fujairah</option>
             </select>
           </div>
           <div class="form-group">
             <label for="destination">To</label>
             <select id="destination" name="destination" required>
               <option value="">— Select City —</option>
-              <!-- نفس المدن زي حقل From -->
-              <option>Mussafah</option>
-              <option>Alain Industrial Area</option>
-              <option>Al Ain City Limits</option>
-              <option>AUH Airport</option>
-              <option>Abu Dhabi City Limits</option>
-              <option>Mafraq</option>
-              <option>ICAD 2/ICAD3</option>
-              <option>ICAD 4</option>
-              <option>Al Wathba</option>
-              <option>Mina Zayed/Free Port</option>
-              <option>Tawazun Industrial Park</option>
-              <option>KIZAD</option>
-              <option>Khalifa Port/Taweelah</option>
-              <option>Sweihan</option>
-              <option>Yas Island</option>
-              <option>Ghantoot</option>
-              <option>Jebel Ali</option>
-              <option>Dubai-Al Qusais</option>
-              <option>Dubai-Al Quoz</option>
-              <option>Dubai-DIP/DIC</option>
-              <option>Dubai-DMC</option>
-              <option>Dubai-City Limits</option>
-              <option>Sharjah</option>
-              <option>Sharjah-Hamriyah</option>
-              <option>Ajman</option>
-              <option>Umm Al Quwain</option>
-              <option>Fujairah</option>
-              <option>Ras Al Khaimah-Al Ghail</option>
-              <option>Ras Al Khaimah-Hamra</option>
-              <option>Al Markaz Area</option>
-              <option>Baniyas</option>
+              <!-- نفس القائمة -->
+              <option value="Mussafah">Mussafah</option>
+              <option value="Alain Industrial Area">Alain Industrial Area</option>
+              <option value="AUH Airport">AUH Airport</option>
+              <option value="ICAD">ICAD</option>
+              <option value="Khalifa Port">Khalifa Port</option>
+              <option value="Abu Dhabi City">Abu Dhabi City</option>
+              <option value="Al Ruwais">Al Ruwais</option>
+              <option value="Al Dhafra">Al Dhafra</option>
+              <option value="Al Ain City">Al Ain City</option>
+              <option value="Dubai">Dubai</option>
+              <option value="Jebel Ali">Jebel Ali</option>
+              <option value="Sharjah">Sharjah</option>
+              <option value="RAK">RAK</option>
+              <option value="Fujairah">Fujairah</option>
             </select>
           </div>
         </div>
 
-        <!-- Trip Type -->
+        <!-- باقي النموذج كما هو -->
+        <!-- Trip Type, Additional Cities, Truck Type, Cargo Type, CICPA, Generate Button -->
+
         <div class="form-group">
           <label>Trip Type</label>
           <div class="trip-options">
-            <label>
-              <input type="radio" name="trip_type" value="one_way" required />
-              <span>One Way</span>
-            </label>
-            <label>
-              <input type="radio" name="trip_type" value="return" />
-              <span>Return</span>
-            </label>
-            <label>
-              <input type="radio" name="trip_type" value="multi" />
-              <span>Multiple</span>
-            </label>
+            <label><input type="radio" name="trip_type" value="one_way" required /><span>One Way</span></label>
+            <label><input type="radio" name="trip_type" value="return" /><span>Return</span></label>
+            <label><input type="radio" name="trip_type" value="multi" /><span>Multiple</span></label>
           </div>
         </div>
 
-        <!-- Additional Cities -->
         <div id="stops-container" class="form-group" style="display:none;">
           <label>Additional Cities</label>
           <div id="stops-list"></div>
           <button type="button" id="add-stop" class="btn-add">+ Add City</button>
         </div>
 
+        <!-- باقي الحقول -->
+        <!-- Truck Type, Cargo Type, CICPA, Generate Button -->
+
         <button type="submit" class="btn-generate">Generate</button>
       </form>
     </div>
   </section>
 
+  <!-- Chat toggle -->
+  <button class="chat-toggle">
+    <img src="{{ url_for('static', filename='chat-icon.png') }}" alt="Chat" />
+  </button>
+
+  <!-- Chat box -->
+  <div id="chat-box" class="chat-box">
+    <div class="chat-header">
+      <span>DSV Chat</span>
+      <button id="chat-close">×</button>
+    </div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-footer">
+      <input type="text" id="chat-input" placeholder="Type a message…" />
+      <button id="chat-send" type="button">Send</button>
+    </div>
+  </div>
+
   <script src="{{ url_for('static', filename='chatbot.js') }}"></script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>
