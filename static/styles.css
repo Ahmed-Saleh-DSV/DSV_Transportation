@@ -1,23 +1,26 @@
 :root {
-  --blue-dsv:       #002664;
+  --blue-dsv: #002664;
   --blue-dsv-light: #4B87E0;
-  --white:          #ffffff;
-  --text-dsv:       #002664;
+  --white: #ffffff;
+  --text-dsv: #002664;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
 }
 html, body {
-  margin: 0; padding: 0;
-  height: 100%; overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
   font-family: Arial, sans-serif;
   background: var(--blue-dsv);
 }
 
 .quote-section {
   position: relative;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -26,9 +29,11 @@ html, body {
 
 .dsv-logo {
   position: absolute;
-  top: 0.5rem; left: 50%;
+  top: 0.5rem;
+  left: 50%;
   transform: translateX(-50%);
-  width: 140px; z-index: 2;
+  width: 140px;
+  z-index: 2;
 }
 
 .quote-card {
@@ -155,7 +160,8 @@ html, body {
 
 .chat-toggle {
   position: fixed;
-  bottom: 2.5rem; right: 2rem;
+  bottom: 2.5rem;
+  right: 2rem;
   z-index: 3000;
   background: var(--white);
   border: none;
@@ -165,19 +171,26 @@ html, body {
   cursor: pointer;
 }
 .chat-toggle img {
-  width: 36px; height: 36px;
+  width: 36px;
+  height: 36px;
 }
 
 #chat-box {
-  position: fixed; bottom: 6rem; right: 2rem;
-  width: 300px; max-width: 90%; max-height: 70vh;
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  width: 300px;
+  max-width: 90%;
+  max-height: 70vh;
   background: var(--white);
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
   transform: translateY(200%);
   transition: transform 0.3s ease;
-  display: flex; flex-direction: column;
-  overflow: hidden; z-index: 2999;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2999;
 }
 #chat-box.open {
   transform: translateY(0);
@@ -186,45 +199,61 @@ html, body {
   background: var(--blue-dsv);
   color: var(--white);
   padding: 0.8rem 1rem;
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-weight: bold;
 }
 #chat-close {
-  background: none; border: none; color: var(--white);
-  font-size: 1.2rem; cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 #chat-messages {
-  flex: 1; padding: 0.75rem 1rem;
-  background: #f9f9f9; 
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: #f9f9f9;
 }
 
 .message {
-  margin-bottom: 0.6rem; clear: both;
+  margin-bottom: 0.6rem;
+  clear: both;
 }
 .message.user .bubble {
   background: var(--blue-dsv);
   color: var(--white);
   padding: 0.4rem 0.8rem;
   border-radius: 16px 16px 4px 16px;
-  float: right; max-width: 80%;
+  float: right;
+  max-width: 80%;
 }
 .message.bot .bubble {
   background: #e2e2e2;
   color: #000;
   padding: 0.4rem 0.8rem;
   border-radius: 16px 16px 16px 4px;
-  float: left; max-width: 80%;
+  float: left;
+  max-width: 80%;
 }
 
 .chat-footer {
-  display: flex; border-top: 1px solid #ccc;
+  display: flex;
+  border-top: 1px solid #ccc;
 }
 #chat-input {
-  flex: 1; padding: 0.6rem; border: none; font-size: 1rem;
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  font-size: 1rem;
 }
 #chat-send {
-  background: var(--blue-dsv); color: var(--white);
-  border: none; padding: 0 1rem; cursor: pointer;
+  background: var(--blue-dsv);
+  color: var(--white);
+  border: none;
+  padding: 0 1rem;
+  cursor: pointer;
   transition: background 0.2s;
 }
 #chat-send:hover {
@@ -250,7 +279,6 @@ html, body {
   position: relative;
   margin-bottom: 1rem;
 }
-
 .stop-group select {
   width: 100%;
   padding-right: 2.5rem;
