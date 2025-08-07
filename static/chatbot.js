@@ -1,4 +1,4 @@
-// 🔧 Fix for mobile viewport height (ensures chat icon appears on load)
+// 🔧 Fix for mobile viewport height
 window.addEventListener('load', () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputEl    = document.getElementById('chat-input');
   const msgsEl     = document.getElementById('chat-messages');
 
-  chatToggle.addEventListener('click', () => chatBox.classList.toggle('open'));
-  chatClose.addEventListener('click', () => chatBox.classList.remove('open'));
+  chatToggle.addEventListener('click', () => chatBox.classList.toggle('active'));
+  chatClose.addEventListener('click', () => chatBox.classList.remove('active'));
   sendBtn.addEventListener('click', sendMessage);
   inputEl.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -68,57 +68,53 @@ document.addEventListener('DOMContentLoaded', () => {
       })();
     }
   }
-});
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const tripRadios     = document.querySelectorAll('input[name="trip_type"]');
-    const stopsContainer = document.getElementById('stops-container');
-    const stopsList      = document.getElementById('stops-list');
-    const quoteCard      = document.querySelector('.quote-card');
-    let stopCount        = 0;
 
-    tripRadios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        tripRadios.forEach(r => r.closest('label').classList.remove('selected'));
-        radio.closest('label').classList.add('selected');
+  // 🛣️ Trip type logic
+  const tripRadios     = document.querySelectorAll('input[name="trip_type"]');
+  const stopsContainer = document.getElementById('stops-container');
+  const stopsList      = document.getElementById('stops-list');
+  const quoteCard      = document.querySelector('.quote-card');
+  let stopCount        = 0;
 
-        if (radio.value === 'multi') {
-          stopsContainer.style.display = 'block';
-          quoteCard.classList.add('scroll-enabled');
-          if (!stopCount) addStop();
-        } else {
-          stopsContainer.style.display = 'none';
-          stopsList.innerHTML = '';
-          stopCount = 0;
-          quoteCard.classList.remove('scroll-enabled');
-        }
-      });
+  tripRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      tripRadios.forEach(r => r.closest('label').classList.remove('selected'));
+      radio.closest('label').classList.add('selected');
+
+      if (radio.value === 'multi') {
+        stopsContainer.style.display = 'block';
+        quoteCard.classList.add('scroll-enabled');
+        if (!stopCount) addStop();
+      } else {
+        stopsContainer.style.display = 'none';
+        stopsList.innerHTML = '';
+        stopCount = 0;
+        quoteCard.classList.remove('scroll-enabled');
+      }
     });
-
-    document.getElementById('add-stop').addEventListener('click', addStop);
-
-    function addStop() {
-      stopCount++;
-      const group = document.createElement('div');
-      group.className = 'stop-group';
-
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.name = `destination${stopCount + 1}`;
-      input.placeholder = `City ${stopCount + 1}`;
-      input.required = true;
-
-      const remove = document.createElement('button');
-      remove.type = 'button';
-      remove.className = 'btn-remove';
-      remove.textContent = '×';
-      remove.addEventListener('click', () => stopsList.removeChild(group));
-
-      group.appendChild(input);
-      group.appendChild(remove);
-      stopsList.appendChild(group);
-    }
   });
-</script>
 
+  document.getElementById('add-stop').addEventListener('click', addStop);
 
+  function addStop() {
+    stopCount++;
+    const group = document.createElement('div');
+    group.className = 'stop-group';
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = `destination${stopCount + 1}`;
+    input.placeholder = `City ${stopCount + 1}`;
+    input.required = true;
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'btn-remove';
+    remove.innerHTML = '<i class="fas fa-times-circle"></i>';
+    remove.addEventListener('click', () => stopsList.removeChild(group));
+
+    group.appendChild(input);
+    group.appendChild(remove);
+    stopsList.appendChild(group);
+  }
+});
