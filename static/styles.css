@@ -44,6 +44,8 @@ html, body {
   max-width: 450px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   margin-top: 1rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 8rem);
 }
 
 .quote-card h1 {
@@ -106,6 +108,7 @@ html, body {
   color: var(--white);
 }
 
+/* Buttons */
 .btn-add {
   margin: 0.5rem 0;
   background: none;
@@ -117,25 +120,6 @@ html, body {
   font-size: 0.9rem;
 }
 .btn-add:hover {
-  background: var(--blue-dsv-light);
-  color: var(--white);
-  border-color: var(--blue-dsv-light);
-}
-
-.btn-remove {
-  position: absolute;
-  top: 2.2rem;
-  right: 0.5rem;
-  background: none;
-  color: var(--blue-dsv);
-  border: 1px solid var(--blue-dsv);
-  border-radius: 6px;
-  padding: 0.2rem 0.6rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  font-weight: bold;
-}
-.btn-remove:hover {
   background: var(--blue-dsv-light);
   color: var(--white);
   border-color: var(--blue-dsv-light);
@@ -158,6 +142,7 @@ html, body {
   background: var(--blue-dsv-light);
 }
 
+/* Chat toggle button */
 .chat-toggle {
   position: fixed;
   bottom: 2.5rem;
@@ -175,6 +160,7 @@ html, body {
   height: 36px;
 }
 
+/* Chat box */
 #chat-box {
   position: fixed;
   bottom: 6rem;
@@ -260,6 +246,113 @@ html, body {
   background: var(--blue-dsv-light);
 }
 
+/* Additional cities stop group */
+.stop-group {
+  position: relative;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Smaller select for additional city */
+.stop-group select {
+  flex: 1;
+  min-width: 140px; /* smaller width */
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--blue-dsv);
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Clear button for additional cities - same style as truck type */
+.stop-group .btn-remove {
+  background: none;
+  border: none;
+  color: var(--blue-dsv);
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+.stop-group .btn-remove:hover {
+  color: var(--white);
+  background-color: var(--blue-dsv);
+}
+
+/* Truck Types Rows */
+.truck-type-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+/* Select wrapper for truck type - bigger flex */
+.select-wrapper {
+  flex: 3; /* Bigger width */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Quantity wrapper - smaller flex */
+.qty-wrapper {
+  flex: 1; /* Smaller width */
+  display: flex;
+  flex-direction: column;
+}
+
+.select-wrapper label,
+.qty-wrapper label {
+  font-weight: bold;
+  color: var(--text-dsv);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+/* Truck type select input */
+.truck-type-row .select-wrapper select {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--blue-dsv);
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Quantity number input */
+.truck-type-row .qty-wrapper input[type="number"] {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--blue-dsv);
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Clear button for truck type */
+.truck-type-row .btn-remove {
+  background: none;
+  border: none;
+  color: var(--blue-dsv);
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+.truck-type-row .btn-remove:hover {
+  color: var(--white);
+  background-color: var(--blue-dsv);
+}
+
 @media (max-width: 480px) {
   .dsv-logo { width: 120px; }
   .quote-card { padding: 1rem; max-width: 320px; }
@@ -268,54 +361,4 @@ html, body {
     bottom: env(safe-area-inset-bottom,1.8rem);
     right: 1rem;
   }
-}
-
-.quote-card.scroll-enabled {
-  max-height: calc(100vh - 8rem);
-  overflow-y: auto;
-}
-
-.stop-group {
-  position: relative;
-  margin-bottom: 1rem;
-}
-.stop-group select {
-  width: 100%;
-  padding-right: 2.5rem;
-}
-.btn-clear {
-  margin-top: 1.5rem;
-  width: 100%;
-  padding: 0.9rem;
-  background: red;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.btn-clear:hover {
-  background: darkred;
-}
-
-.truck-type-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-  align-items: center;
-}
-
-.form-row .form-group.truck {
-  flex: 3;
-}
-
-.form-row .form-group.quantity {
-  flex: 1;
-}
-
-
-#truckTypeContainer {
-  margin-top: 1rem;
 }
