@@ -230,7 +230,7 @@ rates = {
 @app.route('/')
 def home():
     # Render form page
-    return render_template('index.html')
+    return render_template('transport_form.html')
 
 @app.route('/generate_report', methods=['POST'])
 def generate_report():
