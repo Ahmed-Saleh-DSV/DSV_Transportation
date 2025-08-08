@@ -232,8 +232,8 @@ def home():
     # Render form page
     return render_template('transport_form.html')
 
-@app.route('/generate_report', methods=['POST'])
-def generate_report():
+@app.route('/generate_transport', methods=['POST'])
+def generate_transport():
     # Get form data
     truck_type = request.form.get('truck_type')
     from_city = request.form.get('from_city')
