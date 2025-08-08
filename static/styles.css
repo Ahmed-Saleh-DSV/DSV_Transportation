@@ -24,7 +24,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 6rem 1rem 2rem;
+  padding: 1rem 1rem 2rem;
 }
 
 .dsv-logo {
@@ -362,3 +362,4 @@ html, body {
     right: 1rem;
   }
 }
+
