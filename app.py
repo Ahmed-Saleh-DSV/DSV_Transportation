@@ -6,7 +6,7 @@ from docxtpl import DocxTemplate
 
 app = Flask(__name__)
 
-# قاموس الأسعار حسب المدينة ونوع الشاحنة
+# Price rates dictionary by city and truck type
 rates = {
     "Abu Dhabi City Limits": {
         "3 Ton Pickup": 400,
@@ -227,45 +227,50 @@ rates = {
     }
 }
 
-@app.route("/")
-def index():
-    return render_template("transport_form.html")
+@app.route('/')
+def home():
+    # Render form page
+    return render_template('index.html')
 
-@app.route("/generate_transport", methods=["POST"])
-def generate_transport():
-    origin = request.form.get("origin", "")
-    destination = request.form.get("destination", "")
-    trip_type = request.form.get("trip_type", "")
-    truck_type = request.form.get("truck_type", "")
-    cargo_type = request.form.get("cargo_type", "general")
-    cicpa_pass = request.form.get("cicpa", "No") == "Yes"
+@app.route('/generate_report', methods=['POST'])
+def generate_report():
+    # Get form data
+    truck_type = request.form.get('truck_type')
+    from_city = request.form.get('from_city')
 
-    unit_rate = rates.get(destination, {}).get(truck_type, 0)
-    total_fee = unit_rate
+    # Get the price based on city and truck type
+    city_rates = rates.get(from_city)
+    if not city_rates:
+        return "City not found", 400
 
+    price = city_rates.get(truck_type)
+    if price is None:
+        return "Truck type not found for the selected city", 400
+
+    # Load the Word template
     tpl = DocxTemplate("templates/TransportQuotation.docx")
+
+    # Prepare context for template rendering
     context = {
-        "TODAY_DATE": date.today().strftime("%d %B %Y"),
-        "ORIGIN": origin,
-        "DESTINATION": destination,
-        "TRIP_TYPE": trip_type.replace("_", " ").title(),
-        "TRUCK_TYPE": truck_type.replace("_", " ").title(),
-        "CARGO_TYPE": "Chemical Load" if cargo_type == "chemical" else "General Cargo",
-        "CICPA_PASS": "Yes" if cicpa_pass else "No",
-        "UNIT_RATE": f"{unit_rate:.2f} AED",
-        "TOTAL_FEE": f"{total_fee:.2f} AED"
+        'TRUCK_TYPE': truck_type,
+        'FROM': from_city,
+        'UNIT_RATE': price,
+        'TOTAL_FEE': price  # If needed, can calculate more fees here
     }
+
+    # Render the template with context
     tpl.render(context)
 
-    doc_io = io.BytesIO()
-    tpl.save(doc_io)
-    doc_io.seek(0)
-    return send_file(
-        doc_io,
-        as_attachment=True,
-        download_name="DSV_Transport_Quotation.docx",
-        mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    )
+    # Save to in-memory bytes buffer
+    file_stream = io.BytesIO()
+    tpl.save(file_stream)
+    file_stream.seek(0)
+
+    # Send the generated docx file to the user
+    return send_file(file_stream, as_attachment=True, download_name='TransportQuotation.docx')
+
+if __name__ == '__main__':
+    app.run(debug=True)
  
 @app.route("/chat", methods=["POST"])
 def chat():
